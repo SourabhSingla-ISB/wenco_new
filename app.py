@@ -140,9 +140,9 @@ def fn(input_ID=None):
 
     # blobService.create_blob_from_text(containerName, 'Prediction.csv', output)
     
-        
-    #return jsonify(output)
-    return ("Prediction file has been successfully uploaded on Azure Blob")
+    d = {"Name":"Sourabh"}
+    return jsonify(d)
+    #return ("Prediction file has been successfully uploaded on Azure Blob")
 
 
  
