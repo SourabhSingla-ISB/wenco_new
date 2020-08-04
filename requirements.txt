@@ -25,4 +25,4 @@ tensorboard==2.0.2
 tensorboard-plugin-wit==1.6.0.post3
 tensorflow==2.0.0
 tensorflow-estimator==2.0.1
-#azure-storage-blob==2.1.0
+azure-storage-blob==2.1.0
