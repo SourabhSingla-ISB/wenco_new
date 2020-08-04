@@ -37,7 +37,7 @@ api = Api(app)
 
 
 #@app.route('/asset_id/<int:input_ID>/', methods=['GET'])
-@app.route('/asset_id', methods=['GET'])
+@app.route('/', methods=['GET'])
 def fn(input_ID=None):
         
     out_str = "Assest_ID does not exist"
