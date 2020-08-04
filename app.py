@@ -2,8 +2,6 @@ from flask import Flask, render_template
 from flask_restful import Resource,Api
 import pandas as pd
 import numpy as np
-np.random.seed(1234)  
-PYTHONHASHSEED = 0
 import pickle
 from sklearn import preprocessing
 from sklearn.metrics import confusion_matrix, recall_score, precision_score
@@ -147,4 +145,4 @@ def fn(input_ID=None):
 
  
 if __name__ == "__main__":
-    app.run(debug=None,threaded=False)
+    app.run(port=8255 ,debug=None, threaded=False)
