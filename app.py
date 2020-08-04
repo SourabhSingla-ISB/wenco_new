@@ -11,7 +11,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM, Activation
 from flask import jsonify
 import os, uuid, sys
-from azure.storage.blob import BlockBlobService, PublicAccess
+#from azure.storage.blob import BlockBlobService, PublicAccess
 
 
 
@@ -131,14 +131,14 @@ def fn(input_ID=None):
     # saving dataframe into azure blob as a csv file
     output = result.to_csv (index_label="SNo.", encoding = "utf-8")
 
-    accountName = "wenco1"
-    accountKey = "FwniZZzezkiacqf269reGr0kFdFg8vG+gIZG4uxSh7eIczYq0hHYb0+GRFBDvG/GmsK7WSLpB4hzh+dGd6AS7g=="
-    containerName = "wenco1"
+    # accountName = "wenco1"
+    # accountKey = "FwniZZzezkiacqf269reGr0kFdFg8vG+gIZG4uxSh7eIczYq0hHYb0+GRFBDvG/GmsK7WSLpB4hzh+dGd6AS7g=="
+    # containerName = "wenco1"
 
 
-    blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
+    # blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
 
-    blobService.create_blob_from_text(containerName, 'Prediction.csv', output)
+    # blobService.create_blob_from_text(containerName, 'Prediction.csv', output)
     
         
     #return jsonify(output)
