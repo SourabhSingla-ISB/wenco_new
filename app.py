@@ -131,7 +131,7 @@ def fn(input_ID=None):
     blobService.create_container(containerName)
     
     #creating file name
-    filename = '(' + datetime.now().strftime("%H:%M:%S") + ')' + 'Prediction.csv'
+    filename = 'Prediction' + '-' + datetime.now().strftime("%H:%M:%S") + '.csv' 
     
     blobService.create_blob_from_text(containerName, filename , output)
     
