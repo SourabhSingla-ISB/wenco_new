@@ -12,6 +12,8 @@ from keras.layers import Dense, Dropout, LSTM, Activation
 from flask import jsonify
 import os, uuid, sys
 from azure.storage.blob import BlockBlobService, PublicAccess
+from datetime import date
+from datetime import datetime
 
 
 
@@ -30,13 +32,7 @@ sensor_details = pd.read_excel('test_data.xlsx',sheet_name='sensor_details')
 app = Flask(__name__)
 api = Api(app)
 
-# @app.route('/', methods=['GET','POST'])
-# def main():
-    # return render_template('index.htm')
 
-
-
-#@app.route('/asset_id/<int:input_ID>/', methods=['GET'])
 @app.route('/', methods=['GET'])
 def fn(input_ID=None):
         
@@ -93,19 +89,11 @@ def fn(input_ID=None):
     
     
     # converting the output into dictionary
-    # converting the output into dictionary
     d = {}
     for i, row in enumerate(pred_value):
         d[data['Equipment_Id'].unique()[i]] = [int(x) for x in row.tolist()]
                 
-    
-    # # selecting those assets which require maintenance
-    # newDict = dict()
-    # if len(d) > 1:
-        # for (key, value) in d.items():
-            # if any(val==1 for val in value):
-                # newDict[key] = value
-                # d = newDict
+
     
     # converting dictionary into dataframe
     df = pd.DataFrame.from_dict(d, orient='index')
@@ -133,12 +121,20 @@ def fn(input_ID=None):
 
     accountName = "wenco1"
     accountKey = "FwniZZzezkiacqf269reGr0kFdFg8vG+gIZG4uxSh7eIczYq0hHYb0+GRFBDvG/GmsK7WSLpB4hzh+dGd6AS7g=="
-    containerName = "wenco1"
-
-
+    
+    
     blobService = BlockBlobService(account_name=accountName, account_key=accountKey)
-
-    blobService.create_blob_from_text(containerName, 'Prediction.csv', output)
+    
+    # Create a container called 'wenco1'.
+    containerName ='wenco' + '-' + str(date.today())
+    
+    blobService.create_container(containerName)
+    
+    #creating file name
+    filename = 'Prediction.csv' + '(' + datetime.now().strftime("%H:%M:%S") + ')'
+    
+    
+    blobService.create_blob_from_text(containerName, filename , output)
     
         
     #return jsonify(output)
